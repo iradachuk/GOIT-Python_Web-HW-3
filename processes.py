@@ -1,5 +1,6 @@
 from time import time, sleep
-from multiprocessing import Pool, cpu_count
+from multiprocessing import cpu_count
+from concurrent.futures import ProcessPoolExecutor
 
 
 def factorize(*number):
@@ -33,7 +34,7 @@ if __name__ == '__main__':
     timer = time()
     print('Start of multiprocessing calc')
 
-    with Pool(cpu_count()) as executor:
+    with ProcessPoolExecutor(cpu_count()) as executor:
         a, b, c, d = executor.map(factorize, (128, 255, 99999, 10651060))
 
     print(f'Results: \n a = {a}, \n b = {b}, \n c = {c} \n d = {d}')
